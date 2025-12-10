@@ -1,6 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
-import ForecastTotalEmigrants from "../ForecastTotalEmigrants";
+import MLPForecast from '../MLPForecast'
+
 import { getEmigrantAges } from "../../services/emigrantsAgeService";
 import { getEmigrantCivilStatuses } from "../../services/emigrantsCivilStatusService";
 import { getEmigrantEdus } from "../../services/emigrantsEduService";
@@ -84,6 +86,13 @@ export default function Overview() {
       return { year: r.year, total };
     });
   }, [ageData]);
+
+  const forecastSeries = useMemo(() => {
+  return ageTrend.map(row => ({
+    year: row.year,
+    emigrants: row.total, // use total emigrants per year as the series
+  }));
+}, [ageTrend]);
 
   const civilTotal = useMemo(() => {
     const acc = {};
@@ -173,16 +182,14 @@ export default function Overview() {
           international preferences—that support deeper understanding of the
           Filipino diaspora and its development implications.
         </p>
+      </DashboardCard>  
+      
+      <DashboardCard
+       title="MLP Forecast: Total Filipino Emigrants"
+       style={{ gridColumn: "1 / -1" }}
+       >
+        <MLPForecast data={forecastSeries} />
       </DashboardCard>
-
-      <DashboardCard title="Emigrants Trend (Total per Year)">
-        <AgeTrendChart data={ageTrend} />
-      </DashboardCard>
-
-      <DashboardCard title="Machine Learning Forecast (Next 10 Years)">
-        <ForecastTotalEmigrants />
-      </DashboardCard>
-
 
       <DashboardCard title="Emigrants Trend (Total per Year)">
         <AgeTrendChart data={ageTrend} />

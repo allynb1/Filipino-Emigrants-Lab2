@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.2",
     "vite": "npm:rolldown-vite@7.1.14"
   },
   "overrides": {
@@ -16,6 +17,7 @@
   },
   "dependencies": {
     "@nivo/bar": "^0.99.0",
+    "@tensorflow/tfjs": "^4.22.0",
     "@vnedyalk0v/react19-simple-maps": "^1.2.0",
     "d3-scale": "^4.0.2",
     "firebase": "^12.4.0",
