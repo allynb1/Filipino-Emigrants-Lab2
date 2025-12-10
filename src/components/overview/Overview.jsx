@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 
+import ForecastTotalEmigrants from "../ForecastTotalEmigrants";
 import { getEmigrantAges } from "../../services/emigrantsAgeService";
 import { getEmigrantCivilStatuses } from "../../services/emigrantsCivilStatusService";
 import { getEmigrantEdus } from "../../services/emigrantsEduService";
@@ -173,6 +174,15 @@ export default function Overview() {
           Filipino diaspora and its development implications.
         </p>
       </DashboardCard>
+
+      <DashboardCard title="Emigrants Trend (Total per Year)">
+        <AgeTrendChart data={ageTrend} />
+      </DashboardCard>
+
+      <DashboardCard title="Machine Learning Forecast (Next 10 Years)">
+        <ForecastTotalEmigrants />
+      </DashboardCard>
+
 
       <DashboardCard title="Emigrants Trend (Total per Year)">
         <AgeTrendChart data={ageTrend} />
